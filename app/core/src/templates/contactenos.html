@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %} WeHousinn {% endblock %}
+
+{% load static %}
+{% block contenido %}
+<section class="site-section bg-light" id="contact-section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="text-black h1 site-section-heading">Contactanos</h2>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-7 mb-5">
+      
+       <form action="" method="POST"">
+          {% csrf_token %}
+          <h2 class="h4 text-black mb-5">Formulario</h2>
+          <div class="form-group">
+            <label for="">tipo de peticion</label>
+            {{ formulario.tipomsj }}
+          </div> 
+
+          <div class="form-group">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <label class="text-black" for="fname">tu nombre</label>
+              {{ formulario.nombre }}
+            </div>
+            
+          </div>
+
+          <div class="form-group">
+            
+            <div class="col-md-12">
+              <label class="text-black" for="email">Email</label> 
+              {{ formulario.correo }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="message">Mensaje</label> 
+              {{ formulario.mensaje }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="col-md-10 float-left">
+              {% if 'ok' in request.GET %}
+                <span class="alert alert-success">Hemos recibido tu mensaje.</span>
+              {% endif %}
+              {% if 'fail' in request.GET %}
+                <span class="alert alert-danger">No se pudo enviar el mensaje.</span>
+              {% endif %}
+            </span>            
+            <div class="col-md-12">
+              <button type="submit" name="sndmsj" class="btn btn-lg btn-primary col-md-3 float-right mb-3">Enviar</button>
+            </div>
+          </div>
+
+
+            </form> 
+       
+    </div>
+      <div class="col-md-5">
+        
+        <div class="p-4 mb-3 bg-white">
+          <p class="mb-0 font-weight-bold">Dirección</p>
+          <p class="mb-4">Medellín, Antioquia, Colombia</p>
+
+          <p class="mb-0 font-weight-bold">Telefono</p>
+          <p class="mb-4"><a href="#">+57 1234567890</a></p>
+
+          <p class="mb-0 font-weight-bold">Correo electronico</p>
+          <p class="mb-0"><a href="#">wehousinn@gmail.com</a></p>
+          
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1139060545665!2d-75.59181348514537!3d6.2487181954769415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429a762ec1b85%3A0x11d0e220b52924!2sCra.%2070A%20%2343-31%2C%20Medell%C3%ADn%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1590621125846!5m2!1ses!2sco" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
