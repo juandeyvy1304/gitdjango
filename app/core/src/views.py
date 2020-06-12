@@ -2,7 +2,7 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse
 from .forms import ContactForm
-
+from django.core.mail import EmailMessage
 
 class HomePageView(TemplateView):
 
@@ -33,6 +33,19 @@ def Contacto(request):
             mensaje = request.POST.get('mensaje', '')
 
             #creamos el objeto con las variables del formulario
-            return redirect(reverse('contactenos')+"?ok")
+            email = EmailMessage(
+                "RepoDevelopers: tienes un nuevo mensaje de contacto",
+                "De: {} <{}>\n\nescribio:\n\nTipo de Mensaje:{}\n{}".format(nombre,correo,tipomsj,mensaje),
+                "no-contestar@inbox.mailtrap.io",
+                ["piedrahitarojasjuandavid@gmail.com"],
+                reply_to[correo]
+            )
+            #enviamos el correo
+            try:
+                email.send()
+                return redirect(reverse('contactanos')+"?ok")
+            except:
+                return redirect(reverse('contacto')+"?fail")
+
 
     return render(request, 'contactenos.html', {'formulario': formcontact})
